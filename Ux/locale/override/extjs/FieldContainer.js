@@ -26,13 +26,5 @@ Ext.define('Ux.locale.override.extjs.FieldContainer', {
         }
 
         me.callOverridden(arguments);
-    },
-
-    setFieldLabel : function(text) {
-        this.labelEl.update(text);
-
-        this.fieldLabel = text;
-
-        return this;
     }
 });
