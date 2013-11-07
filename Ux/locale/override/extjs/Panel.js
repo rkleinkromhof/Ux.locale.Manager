@@ -5,11 +5,17 @@ Ext.define('Ux.locale.override.extjs.Panel', {
         'Ux.locale.override.extjs.Component'
     ],
 
-    initComponent : function() {
-        this.callOverridden(arguments);
+    initComponent: function() {
+        var me = this;
 
-        if (this.enableLocale) {
-            this.title = '&nbsp;';
+        me.callParent(arguments);
+
+        // set a blank title so the header gets rendered.
+        // This way we can fill in the localized value later
+        if (me.enableLocale && me.locales && me.locales.title) {
+            Ext.apply(me, {
+                title: '&nbsp;'
+            });
         }
     },
 
