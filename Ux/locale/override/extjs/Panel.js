@@ -1,7 +1,7 @@
 Ext.define('Ux.locale.override.extjs.Panel', {
-    override : 'Ext.panel.Panel',
+    override: 'Ext.panel.Panel',
 
-    requires : [
+    requires: [
         'Ux.locale.override.extjs.Component'
     ],
 
@@ -10,36 +10,10 @@ Ext.define('Ux.locale.override.extjs.Panel', {
 
         me.callParent(arguments);
 
-        // set a blank title so the header gets rendered.
-        // This way we can fill in the localized value later
-        if (me.enableLocale && me.locales && me.locales.title) {
-            Ext.apply(me, {
-                title: '&nbsp;'
-            });
+        // If no title is set but the title does need to be localized, set a blank title
+		// so the header gets rendered. This way we can fill in the localized value later
+        if (!me.title && me.enableLocale && me.locales && me.locales.title) {
+            me.title = '&nbsp;';
         }
-    },
-
-    setLocale : function(locale) {
-        var me          = this,
-            locales     = me.locales,
-            title       = locales.title,
-            manager     = me.locale,
-            defaultText = '',
-            text;
-
-        if (title) {
-            if (Ext.isObject(title)) {
-                defaultText = title.defaultText;
-                title       = title.key;
-            }
-
-            text = manager.get(title, defaultText);
-
-            if (Ext.isString(text)) {
-                me.setTitle(text);
-            }
-        }
-
-        me.callOverridden(arguments);
     }
 });
